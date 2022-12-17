@@ -5,6 +5,7 @@ const disFib = document.querySelector('#display-fib');
 const disIter = document.querySelector('#display-iter');
 
 //calculator DOM
+const calcForm = document.querySelector('#calc-form');
 const calcDisplay = document.querySelector('#result');
 const clearBtn = document.querySelector('#clear-btn');
 const calculateBtn = document.querySelector('#equal-btn');
@@ -52,4 +53,3 @@ disIter.textContent = iteratorArr.join(', ');
 //inputHandler() takes input values of btn presses and stores in calcArr
 //calcArr to store inputs, dipslayCalc() displays last item in arr to calcDisplay
 //calculate() will return results to be displayed on press of =
-//
