@@ -36,6 +36,11 @@
                 let calcArr = [];
                 document.getElementById('result').value = '';
             }
+
+            function calculate() {
+                let equation = calcArr.join('');
+                console.log('equation', equation);
+            }
         </script>
     </head>
 
@@ -96,7 +101,9 @@
 
                     <!-- calculate() function evaluates the mathematical expression -->
 
-                    <td><input type="button" value="=" onclick="calculate()" id="equal-btn" /></td>
+                    <td>
+                        <input type="button" value="=" onclick="calculate()" id="equal-btn" />
+                    </td>
 
                     <td><input type="button" value="*" onclick="handleInput('*')" /></td>
                 </tr>
