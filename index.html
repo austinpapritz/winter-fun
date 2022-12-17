@@ -20,11 +20,17 @@
         <link rel="stylesheet" href="styles/global.css" />
         <!-- add link for page specific css -->
         <script>
+            // const calcDisplay = document.getElementById('result');
+            const clearBtn = document.querySelector('#clear-btn');
+            const calculateBtn = document.querySelector('#equal-btn');
+
             let calcArr = [];
 
             function handleInput(n) {
+                console.log('n', n);
                 calcArr.push(n);
-                console.log('calcArr', calcArr);
+                var display = calcArr.join(' ');
+                document.getElementById('result').value = display;
             }
         </script>
     </head>

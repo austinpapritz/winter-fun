@@ -4,12 +4,6 @@
 const disFib = document.querySelector('#display-fib');
 const disIter = document.querySelector('#display-iter');
 
-//calculator DOM
-const calcForm = document.querySelector('#calc-form');
-const calcDisplay = document.querySelector('#result');
-const clearBtn = document.querySelector('#clear-btn');
-const calculateBtn = document.querySelector('#equal-btn');
-
 /* State */
 
 /* Events */
