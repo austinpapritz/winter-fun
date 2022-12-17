@@ -3,6 +3,12 @@
 /* Get DOM Elements */
 const disFib = document.querySelector('#display-fib');
 const disIter = document.querySelector('#display-iter');
+
+//calculator DOM
+const calcDisplay = document.querySelector('#result');
+const clearBtn = document.querySelector('#clear-btn');
+const calculateBtn = document.querySelector('#equal-btn');
+
 /* State */
 
 /* Events */
@@ -24,7 +30,7 @@ function generateFibonaccis(n) {
     return fib;
 }
 //do the first 100 digits of the fib sequence, set this to the var fib
-var fib = generateFibonaccis(100);
+var fib = generateFibonaccis(15);
 //.join inserts whatever you put in the parenthesis IN BETWEEN each value of fib.
 disFib.textContent = fib.join(', ');
 
@@ -40,3 +46,10 @@ for (let key of iterator) {
 }
 //display the array by joining each value separated by a comma and space
 disIter.textContent = iteratorArr.join(', ');
+
+//functional calculator
+//clearScreen(), displayCalc(), calculate(), handleInput()
+//inputHandler() takes input values of btn presses and stores in calcArr
+//calcArr to store inputs, dipslayCalc() displays last item in arr to calcDisplay
+//calculate() will return results to be displayed on press of =
+//
