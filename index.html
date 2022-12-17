@@ -27,10 +27,14 @@
             let calcArr = [];
 
             function handleInput(n) {
-                console.log('n', n);
                 calcArr.push(n);
                 var display = calcArr.join(' ');
                 document.getElementById('result').value = display;
+            }
+
+            function clearScreen() {
+                let calcArr = [];
+                document.getElementById('result').value = '';
             }
         </script>
     </head>
