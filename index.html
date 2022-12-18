@@ -32,9 +32,9 @@
                 calcArr[calcArr.length - 1] = newOperator;
             }
 
-            function compareNAndLastItem(n, lastItem) {
-                if (n === ('/' || '-' || '+' || '*') && lastItem === ('/' || '-' || '+' || '*')) {
-                    replaceLast(n);
+            function tossIfFirstNotNum(n) {
+                if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
+                    return;
                 } else {
                     return n;
                 }
@@ -49,33 +49,36 @@
                 }
             }
 
+            function compareNAndLastItem(n, lastItem) {
+                if (n === ('/' || '-' || '+' || '*') && lastItem === ('/' || '-' || '+' || '*')) {
+                    replaceLast(n);
+                } else {
+                    return n;
+                }
+            }
+
             function displayCalcArr() {
                 //display the calcArr (with a space between values) and the current squished number in results
                 document.getElementById('result').value =
                     calcArr.join(' ') + ' ' + numSquish.join('');
             }
 
-            function tossIfFirstNotNum(n) {
-                console.log('n', n);
-                if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
-                    console.log('calcArr', calcArr);
-                    return;
-                } else {
-                    return n;
-                }
-            }
-
             function handleInput(n) {
                 //if first input is an operator then toss, otherwise return n
-                tossIfFirstNotNum(n);
+                let o = tossIfFirstNotNum(n);
                 //setting last item in calcArr to lastItem
                 let lastItem = calcArr[calcArr.length - 1];
+
+                console.log('calcArr', calcArr);
+                console.log('lastItem', lastItem);
                 //if both n and last item are operators then replace lastItem with n, otherwise return n
-                compareNAndLastItem(n, lastItem);
-                //at this point n could be a number or first-time operator
-                ifFirstOperatorPush(n);
-                //at this point n is a number
-                numSquish.push(n);
+                let p = compareNAndLastItem(n, lastItem);
+                //at this point p could be a number or first-time operator
+                let q = ifFirstOperatorPush(n);
+                console.log('q after first operator', q);
+                //at this point q is a number
+                numSquish.push(q);
+                console.log('numSquish', numSquish);
                 displayCalcArr();
             }
 
@@ -95,7 +98,8 @@
                 //push whatever numbers are in numSquish to calcArr
                 pushToCalcArr();
                 //set results to the evaluation of equation
-                document.getElementById('result').value = eval(calcArr);
+                const results = calcArr.join('');
+                document.getElementById('result').value = eval(results);
                 calcArr = [];
             }
         </script>
