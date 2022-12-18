@@ -30,18 +30,31 @@
             function pushToCalcArr() {
                 calcArr.push(numSquish.join(''));
                 numSquish = [];
-                return calcArr;
             }
-            //user can push multiple operators
-            //fix this by calculating after
+            //BUG can use multiple operators in a row
+            //BUG = on single number goes undefined
+            //BUG should be able to operate on result of previous evaluation
             function handleInput(n) {
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
+                    //if n is an operator then push the numbers in numSquish to calcArr and clear numSquish
                     pushToCalcArr();
-                    calcArr.push(n);
-                    var display = calcArr.join(' ');
-                    document.getElementById('result').value = display;
+                    let value = calcArr[calcArr.length - 1];
+                    //NOT WORKING if the last thing in the array was an operator then return
+                    if (value === '/' || value === '-' || value === '+' || value === '*') {
+                        console.log('stop');
+                        return;
+                    } else {
+                        //else if the last item in array is NOT an operator, push it to calcArr
+                        calcArr.push(n);
+                        //put a space in between each value of calcArr
+                        var display = calcArr.join(' ');
+                        //display it in results
+                        document.getElementById('result').value = display;
+                    }
                 } else {
+                    //else if the user clicked number, push to numSquish
                     numSquish.push(n);
+                    //display the calcArr and the current squished number in results
                     document.getElementById('result').value =
                         calcArr.join(' ') + ' ' + numSquish.join('');
                 }
