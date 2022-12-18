@@ -20,31 +20,25 @@
         <link rel="stylesheet" href="styles/global.css" />
         <!-- add link for page specific css -->
         <script>
-            // const calcDisplay = document.getElementById('result');
-            const clearBtn = document.querySelector('#clear-btn');
-            const calculateBtn = document.querySelector('#equal-btn');
-
             let numSquish = [];
             let calcArr = [];
 
-            function pushToCalcArr() {
-                calcArr.push(numSquish.join(''));
-                numSquish = [];
-            }
-            //BUG can use multiple operators in a row
-            //BUG = on single number goes undefined
-            //BUG should be able to operate on result of previous evaluation
+            //BUG: can use multiple operators in a row
+            //BUG: user can start with operator
+            //BUG: should not be able to press '=' until an operator has been pressed
+            //BUG: should be able to operate on result of previous evaluation
             function handleInput(n) {
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
                     //if n is an operator then push the numbers in numSquish to calcArr and clear numSquish
                     pushToCalcArr();
+                    //setting value to the last item in array
                     let value = calcArr[calcArr.length - 1];
-                    //NOT WORKING if the last thing in the array was an operator then return
+                    //NOT WORKING: if the last thing in the array was an operator then return
                     if (value === '/' || value === '-' || value === '+' || value === '*') {
-                        console.log('stop');
+                        console.log('tossed out');
                         return;
                     } else {
-                        //else if the last item in array is NOT an operator, push it to calcArr
+                        //else if the last item in array is NOT already an operator, then push the current operator to calcArr
                         calcArr.push(n);
                         //put a space in between each value of calcArr
                         var display = calcArr.join(' ');
@@ -54,12 +48,17 @@
                 } else {
                     //else if the user clicked number, push to numSquish
                     numSquish.push(n);
-                    //display the calcArr and the current squished number in results
+                    //display the calcArr (with a space between values) and the current squished number in results
                     document.getElementById('result').value =
                         calcArr.join(' ') + ' ' + numSquish.join('');
                 }
             }
 
+            function pushToCalcArr() {
+                //this function makes sure numbers and decimals display without spaces, handleInput() adds a space between the numbers and operators
+                calcArr.push(numSquish.join(''));
+                numSquish = [];
+            }
             function clearScreen() {
                 calcArr = [];
                 numSquish = [];
@@ -67,9 +66,10 @@
             }
 
             function calculate() {
+                //push whatever numbers are in numSquish to calcArr
                 pushToCalcArr();
-                let equation = calcArr.join('');
-                document.getElementById('result').value = eval(equation);
+                //set results to the evaluation of equation
+                document.getElementById('result').value = eval(calcArr);
                 calcArr = [];
             }
         </script>
