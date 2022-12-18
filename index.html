@@ -24,20 +24,36 @@
             const clearBtn = document.querySelector('#clear-btn');
             const calculateBtn = document.querySelector('#equal-btn');
 
+            let numSquish = [];
             let calcArr = [];
 
+            function pushToCalcArr() {
+                calcArr.push(numSquish.join(''));
+                numSquish = [];
+                return calcArr;
+            }
+
             function handleInput(n) {
-                calcArr.push(n);
-                var display = calcArr.join(' ');
-                document.getElementById('result').value = display;
+                if (n === '/' || n === '-' || n === '+' || n === '*') {
+                    pushToCalcArr();
+                    calcArr.push(n);
+                    var display = calcArr.join(' ');
+                    document.getElementById('result').value = display;
+                } else {
+                    numSquish.push(n);
+                    document.getElementById('result').value =
+                        calcArr.join(' ') + ' ' + numSquish.join('');
+                }
             }
 
             function clearScreen() {
-                let calcArr = [];
+                calcArr = [];
+                numSquish = [];
                 document.getElementById('result').value = '';
             }
 
             function calculate() {
+                pushToCalcArr();
                 let equation = calcArr.join('');
                 document.getElementById('result').value = eval(equation);
                 calcArr = [];
