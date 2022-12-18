@@ -41,20 +41,19 @@
             }
 
             function compareNAndLastItem(n) {
-                if (n === ('/' || '-' || '+' || '*')) {
+                //BUGGED: if I leave this in, it doesn't replace, if I comment out it replaces when last, and after a num has been pressed
+                if (n === '/' || n === '-' || n === '+' || n === '*') {
                     pushToCalcArr();
                 }
-                //BUGGED: setting var to last item in calcArr
+
                 let lastItem = calcArr[calcArr.length - 1];
-                console.log('lastItem', lastItem);
+
                 if (
                     (n === '/' || n === '-' || n === '+' || n === '*') &&
                     (lastItem === '/' || lastItem === '-' || lastItem === '+' || lastItem === '*')
                 ) {
-                    console.log('both n and last item are operators');
                     replaceLast(n);
                 } else {
-                    console.log('n is not an operator OR first operator');
                     return n;
                 }
             }
@@ -62,7 +61,6 @@
             function replaceLast(newOperator) {
                 console.log('replacing in progress');
                 calcArr[calcArr.length - 1] = newOperator;
-                console.log(calcArr, 'check that operator is replaced');
             }
 
             function ifFirstOperatorPush(n) {
