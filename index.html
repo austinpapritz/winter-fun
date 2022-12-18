@@ -39,6 +39,8 @@
 
             function calculate() {
                 let equation = calcArr.join('');
+                document.getElementById('result').value = eval(equation);
+                calcArr = [];
             }
         </script>
     </head>
