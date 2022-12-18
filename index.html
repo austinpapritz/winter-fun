@@ -27,31 +27,55 @@
             //BUG: user can start with operator
             //BUG: should not be able to press '=' until an operator has been pressed
             //BUG: should be able to operate on result of previous evaluation
-            function handleInput(n) {
-                if (n === '/' || n === '-' || n === '+' || n === '*') {
-                    //if n is an operator then push the numbers in numSquish to calcArr and clear numSquish
-                    pushToCalcArr();
-                    //setting value to the last item in array
-                    let value = calcArr[calcArr.length - 1];
-                    //NOT WORKING: if the last thing in the array was an operator then return
-                    if (value === '/' || value === '-' || value === '+' || value === '*') {
-                        console.log('tossed out');
-                        return;
-                    } else {
-                        //else if the last item in array is NOT already an operator, then push the current operator to calcArr
-                        calcArr.push(n);
-                        //put a space in between each value of calcArr
-                        var display = calcArr.join(' ');
-                        //display it in results
-                        document.getElementById('result').value = display;
-                    }
+
+            function replaceLast(newOperator) {
+                calcArr[calcArr.length - 1] = newOperator;
+            }
+
+            function compareNAndLastItem(n, lastItem) {
+                if (n === ('/' || '-' || '+' || '*') && lastItem === ('/' || '-' || '+' || '*')) {
+                    replaceLast(n);
                 } else {
-                    //else if the user clicked number, push to numSquish
-                    numSquish.push(n);
-                    //display the calcArr (with a space between values) and the current squished number in results
-                    document.getElementById('result').value =
-                        calcArr.join(' ') + ' ' + numSquish.join('');
+                    return n;
                 }
+            }
+
+            function ifFirstOperatorPush(n) {
+                if (n === '/' || n === '-' || n === '+' || n === '*') {
+                    calcArr.push(n);
+                } else {
+                    return n;
+                }
+            }
+
+            function displayCalcArr() {
+                //display the calcArr (with a space between values) and the current squished number in results
+                document.getElementById('result').value =
+                    calcArr.join(' ') + ' ' + numSquish.join('');
+            }
+
+            function tossIfFirstNotNum(n) {
+                console.log('n', n);
+                if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
+                    console.log('calcArr', calcArr);
+                    return;
+                } else {
+                    return n;
+                }
+            }
+
+            function handleInput(n) {
+                //if first input is an operator then toss
+                tossIfFirstNotNum(n);
+                //setting last item in calcArr to lastItem
+                let lastItem = calcArr[calcArr.length - 1];
+                //if both n and last item are operators then replace lastItem with n
+                compareNAndLastItem(n, lastItem);
+                //at this point n could be a number or first-time operator
+                ifFirstOperatorPush(n);
+                //at this point n is a number
+                numSquish.push(n);
+                displayCalcArr();
             }
 
             function pushToCalcArr() {
@@ -59,6 +83,7 @@
                 calcArr.push(numSquish.join(''));
                 numSquish = [];
             }
+
             function clearScreen() {
                 calcArr = [];
                 numSquish = [];
