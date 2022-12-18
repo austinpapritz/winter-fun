@@ -34,8 +34,10 @@
 
             function tossIfFirstNotNum(n) {
                 if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
+                    console.log('tossing');
                     return;
                 } else {
+                    console.log('not tossing');
                     return n;
                 }
             }
@@ -69,16 +71,12 @@
                 //setting last item in calcArr to lastItem
                 let lastItem = calcArr[calcArr.length - 1];
 
-                console.log('calcArr', calcArr);
-                console.log('lastItem', lastItem);
                 //if both n and last item are operators then replace lastItem with n, otherwise return n
-                let p = compareNAndLastItem(n, lastItem);
+                let p = compareNAndLastItem(o, lastItem);
                 //at this point p could be a number or first-time operator
-                let q = ifFirstOperatorPush(n);
-                console.log('q after first operator', q);
+                let q = ifFirstOperatorPush(p);
                 //at this point q is a number
                 numSquish.push(q);
-                console.log('numSquish', numSquish);
                 displayCalcArr();
             }
 
