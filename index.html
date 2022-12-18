@@ -28,36 +28,47 @@
             //BUG: should not be able to press '=' until an operator has been pressed
             //BUG: should be able to operate on result of previous evaluation
 
-            function replaceLast(newOperator) {
-                calcArr[calcArr.length - 1] = newOperator;
-            }
-
             function tossIfFirstNotNum(n) {
                 if (
                     (n === '/' || n === '-' || n === '+' || n === '*') &&
                     calcArr.length === 0 &&
                     numSquish.length === 0
                 ) {
-                    console.log('tossing');
                     return;
                 } else {
-                    console.log('not tossing');
                     return n;
                 }
+            }
+
+            function compareNAndLastItem(n) {
+                if (n === ('/' || '-' || '+' || '*')) {
+                    pushToCalcArr();
+                }
+                //BUGGED: setting var to last item in calcArr
+                let lastItem = calcArr[calcArr.length - 1];
+                console.log('lastItem', lastItem);
+                if (
+                    (n === '/' || n === '-' || n === '+' || n === '*') &&
+                    (lastItem === '/' || lastItem === '-' || lastItem === '+' || lastItem === '*')
+                ) {
+                    console.log('both n and last item are operators');
+                    replaceLast(n);
+                } else {
+                    console.log('n is not an operator OR first operator');
+                    return n;
+                }
+            }
+
+            function replaceLast(newOperator) {
+                console.log('replacing in progress');
+                calcArr[calcArr.length - 1] = newOperator;
+                console.log(calcArr, 'check that operator is replaced');
             }
 
             function ifFirstOperatorPush(n) {
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
                     pushToCalcArr();
                     calcArr.push(n);
-                } else {
-                    return n;
-                }
-            }
-
-            function compareNAndLastItem(n, lastItem) {
-                if (n === ('/' || '-' || '+' || '*') && lastItem === ('/' || '-' || '+' || '*')) {
-                    replaceLast(n);
                 } else {
                     return n;
                 }
@@ -72,11 +83,8 @@
             function handleInput(n) {
                 //if first input is an operator then toss, otherwise return n
                 let o = tossIfFirstNotNum(n);
-                //setting last item in calcArr to lastItem
-                let lastItem = calcArr[calcArr.length - 1];
-
-                //if both n and last item are operators then replace lastItem with n, otherwise return n
-                let p = compareNAndLastItem(o, lastItem);
+                //if both o and last item are operators then replace lastItem with n, otherwise return n
+                let p = compareNAndLastItem(o);
                 //at this point p could be a number or first-time operator
                 let q = ifFirstOperatorPush(p);
                 //at this point q is a number
