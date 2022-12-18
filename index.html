@@ -33,7 +33,11 @@
             }
 
             function tossIfFirstNotNum(n) {
-                if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
+                if (
+                    (n === '/' || n === '-' || n === '+' || n === '*') &&
+                    calcArr.length === 0 &&
+                    numSquish.length === 0
+                ) {
                     console.log('tossing');
                     return;
                 } else {
