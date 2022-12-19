@@ -39,35 +39,32 @@
                 //BUGGED:if I leave this in, it doesn't replace, if I comment out it replaces when last, and after a num has been pressed
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
                     let lastItem = calcArr[calcArr.length - 2];
-
+                    console.log('n', n);
+                    console.log('calcArr', calcArr);
+                    console.log('lastItem', lastItem);
                     if (
                         lastItem === '/' ||
                         lastItem === '-' ||
                         lastItem === '+' ||
                         lastItem === '*'
                     ) {
+                        //if the last item (besides the space) is an operator then replace it
                         replaceLast(n);
                     } else {
-                        return n;
+                        //if the lastItem isn't an operator then simply push n with spaces
+                        calcArr.push(' ');
+                        calcArr.push(n);
+                        calcArr.push(' ');
                     }
+                } else {
+                    //if number then push to calcArr
+                    calcArr.push(n);
                 }
-                return n;
             }
 
             function replaceLast(newOperator) {
+                console.log('replacing in progress');
                 calcArr[calcArr.length - 2] = newOperator;
-            }
-
-            function ifFirstOperatorOrNumPush(n) {
-                if (n === '/' || n === '-' || n === '+' || n === '*') {
-                    //if first operator push to calcArr with spaces
-                    calcArr.push(' ');
-                    calcArr.push(n);
-                    calcArr.push(' ');
-                } else {
-                    //if number push to calcArr
-                    calcArr.push(n);
-                }
             }
 
             function displayCalcArr() {
@@ -80,10 +77,8 @@
                 let o = tossIfFirstNotNum(n);
                 console.log('o', o);
                 //if both o and last item are operators then replace lastItem with n, otherwise return n
-                let p = compareNAndLastItem(o);
-                console.log('p', p);
+                compareNAndLastItem(o);
                 //at this point p could be a number or first-time operator
-                ifFirstOperatorOrNumPush(p);
                 //at this point q is a number
                 displayCalcArr();
             }
