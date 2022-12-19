@@ -35,11 +35,9 @@
 
             function compareNAndLastItem(n) {
                 console.log('n', n);
-                //BUGGED:if I leave this in, it doesn't replace, if I comment out it replaces when last, and after a num has been pressed
+                //if n is operator then compare it to the penultimate item to either replace or add n to end
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
                     let lastItem = calcArr[calcArr.length - 2];
-                    console.log('calcArr', calcArr);
-                    console.log('lastItem', lastItem);
                     if (
                         lastItem === '/' ||
                         lastItem === '-' ||
@@ -61,7 +59,6 @@
             }
 
             function replaceLast(newOperator) {
-                console.log('replacing in progress');
                 calcArr[calcArr.length - 2] = newOperator;
             }
 
@@ -77,11 +74,9 @@
             function handleInput(n) {
                 //if first input is an operator then toss, otherwise return n
                 let o = tossIfFirstNotNum(n);
-                console.log('o', o);
-                //if both o and last item are operators then replace lastItem with n, otherwise return n
+                //if both o and penultimate item are operators then replace lastItem with n
                 compareNAndLastItem(o);
-                //at this point p could be a number or first-time operator
-                //at this point q is a number
+
                 displayCalcArr();
             }
 
