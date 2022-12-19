@@ -38,7 +38,7 @@
             function compareNAndLastItem(n) {
                 //BUGGED:if I leave this in, it doesn't replace, if I comment out it replaces when last, and after a num has been pressed
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
-                    let lastItem = calcArr[calcArr.length - 1];
+                    let lastItem = calcArr[calcArr.length - 2];
 
                     if (
                         lastItem === '/' ||
@@ -55,11 +55,10 @@
             }
 
             function replaceLast(newOperator) {
-                console.log('replacing in progress');
-                calcArr[calcArr.length - 1] = newOperator;
+                calcArr[calcArr.length - 2] = newOperator;
             }
 
-            function ifFirstOperatorPush(n) {
+            function ifFirstOperatorOrNumPush(n) {
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
                     //if first operator push to calcArr with spaces
                     calcArr.push(' ');
@@ -84,7 +83,7 @@
                 let p = compareNAndLastItem(o);
                 console.log('p', p);
                 //at this point p could be a number or first-time operator
-                ifFirstOperatorPush(p);
+                ifFirstOperatorOrNumPush(p);
                 //at this point q is a number
                 displayCalcArr();
             }
@@ -98,7 +97,11 @@
                 //set results to the evaluation of equation
                 const results = calcArr.join('');
                 document.getElementById('result').value = eval(results);
+                //the follow replaces the previous calcArr with the answer of results so user can perform math on it
                 calcArr = [];
+                let newEquation = document.getElementById('result').value;
+                calcArr.push(newEquation);
+                displayCalcArr();
             }
         </script>
     </head>
