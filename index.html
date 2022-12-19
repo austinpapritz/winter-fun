@@ -20,7 +20,6 @@
         <link rel="stylesheet" href="styles/global.css" />
         <!-- add link for page specific css -->
         <script>
-            let numSquish = [];
             let calcArr = [];
 
             //BUG: can use multiple operators in a row
@@ -29,11 +28,7 @@
             //BUG: should be able to operate on result of previous evaluation
 
             function tossIfFirstNotNum(n) {
-                if (
-                    (n === '/' || n === '-' || n === '+' || n === '*') &&
-                    calcArr.length === 0 &&
-                    numSquish.length === 0
-                ) {
+                if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
                     return;
                 } else {
                     return n;
@@ -41,21 +36,22 @@
             }
 
             function compareNAndLastItem(n) {
-                //BUGGED: if I leave this in, it doesn't replace, if I comment out it replaces when last, and after a num has been pressed
+                //BUGGED:if I leave this in, it doesn't replace, if I comment out it replaces when last, and after a num has been pressed
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
-                    pushToCalcArr();
-                }
+                    let lastItem = calcArr[calcArr.length - 1];
 
-                let lastItem = calcArr[calcArr.length - 1];
-
-                if (
-                    (n === '/' || n === '-' || n === '+' || n === '*') &&
-                    (lastItem === '/' || lastItem === '-' || lastItem === '+' || lastItem === '*')
-                ) {
-                    replaceLast(n);
-                } else {
-                    return n;
+                    if (
+                        lastItem === '/' ||
+                        lastItem === '-' ||
+                        lastItem === '+' ||
+                        lastItem === '*'
+                    ) {
+                        replaceLast(n);
+                    } else {
+                        return n;
+                    }
                 }
+                return n;
             }
 
             function replaceLast(newOperator) {
@@ -65,46 +61,40 @@
 
             function ifFirstOperatorPush(n) {
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
-                    pushToCalcArr();
+                    //if first operator push to calcArr with spaces
+                    calcArr.push(' ');
                     calcArr.push(n);
+                    calcArr.push(' ');
                 } else {
-                    return n;
+                    //if number push to calcArr
+                    calcArr.push(n);
                 }
             }
 
             function displayCalcArr() {
                 //display the calcArr (with a space between values) and the current squished number in results
-                document.getElementById('result').value =
-                    calcArr.join(' ') + ' ' + numSquish.join('');
+                document.getElementById('result').value = calcArr.join('');
             }
 
             function handleInput(n) {
                 //if first input is an operator then toss, otherwise return n
                 let o = tossIfFirstNotNum(n);
+                console.log('o', o);
                 //if both o and last item are operators then replace lastItem with n, otherwise return n
                 let p = compareNAndLastItem(o);
+                console.log('p', p);
                 //at this point p could be a number or first-time operator
-                let q = ifFirstOperatorPush(p);
+                ifFirstOperatorPush(p);
                 //at this point q is a number
-                numSquish.push(q);
                 displayCalcArr();
-            }
-
-            function pushToCalcArr() {
-                //this function makes sure numbers and decimals display without spaces, handleInput() adds a space between the numbers and operators
-                calcArr.push(numSquish.join(''));
-                numSquish = [];
             }
 
             function clearScreen() {
                 calcArr = [];
-                numSquish = [];
                 document.getElementById('result').value = '';
             }
 
             function calculate() {
-                //push whatever numbers are in numSquish to calcArr
-                pushToCalcArr();
                 //set results to the evaluation of equation
                 const results = calcArr.join('');
                 document.getElementById('result').value = eval(results);
