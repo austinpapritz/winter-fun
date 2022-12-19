@@ -22,12 +22,10 @@
         <script>
             let calcArr = [];
 
-            //BUG: can use multiple operators in a row
-            //BUG: user can start with operator
-            //BUG: should not be able to press '=' until an operator has been pressed
-            //BUG: should be able to operate on result of previous evaluation
+            //BUG: second operator click displays operator. Must change setting tossIfFirstNotNum to 'o'
 
             function tossIfFirstNotNum(n) {
+                console.log('calcArr.length', calcArr.length);
                 if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
                     return;
                 } else {
@@ -36,10 +34,10 @@
             }
 
             function compareNAndLastItem(n) {
+                console.log('n', n);
                 //BUGGED:if I leave this in, it doesn't replace, if I comment out it replaces when last, and after a num has been pressed
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
                     let lastItem = calcArr[calcArr.length - 2];
-                    console.log('n', n);
                     console.log('calcArr', calcArr);
                     console.log('lastItem', lastItem);
                     if (
@@ -69,7 +67,11 @@
 
             function displayCalcArr() {
                 //display the calcArr (with a space between values) and the current squished number in results
-                document.getElementById('result').value = calcArr.join('');
+                if (!isNaN(calcArr[0])) {
+                    document.getElementById('result').value = calcArr.join('');
+                } else {
+                    calcArr = [];
+                }
             }
 
             function handleInput(n) {
