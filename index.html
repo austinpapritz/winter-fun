@@ -25,7 +25,6 @@
             //BUG: second operator click displays operator. Must change setting tossIfFirstNotNum to 'o'
 
             function tossIfFirstNotNum(n) {
-                console.log('calcArr.length', calcArr.length);
                 if ((n === '/' || n === '-' || n === '+' || n === '*') && calcArr.length === 0) {
                     return;
                 } else {
@@ -33,21 +32,20 @@
                 }
             }
 
-            function compareNAndLastItem(n) {
-                console.log('n', n);
+            function compareNAndPenultimateItem(n) {
                 //if n is operator then compare it to the penultimate item to either replace or add n to end
                 if (n === '/' || n === '-' || n === '+' || n === '*') {
-                    let lastItem = calcArr[calcArr.length - 2];
+                    let penultimateItem = calcArr[calcArr.length - 2];
                     if (
-                        lastItem === '/' ||
-                        lastItem === '-' ||
-                        lastItem === '+' ||
-                        lastItem === '*'
+                        penultimateItem === '/' ||
+                        penultimateItem === '-' ||
+                        penultimateItem === '+' ||
+                        penultimateItem === '*'
                     ) {
                         //if the last item (besides the space) is an operator then replace it
                         replaceLast(n);
                     } else {
-                        //if the lastItem isn't an operator then simply push n with spaces
+                        //if the penultimateItem isn't an operator then simply push n with spaces
                         calcArr.push(' ');
                         calcArr.push(n);
                         calcArr.push(' ');
@@ -63,10 +61,12 @@
             }
 
             function displayCalcArr() {
-                //display the calcArr (with a space between values) and the current squished number in results
+                //!isNan makes sure that user cannot start with operator
                 if (!isNaN(calcArr[0])) {
+                    //display the calcArr (with a space between values)
                     document.getElementById('result').value = calcArr.join('');
                 } else {
+                    //if the user did start with operator then clear calcArr
                     calcArr = [];
                 }
             }
@@ -74,8 +74,8 @@
             function handleInput(n) {
                 //if first input is an operator then toss, otherwise return n
                 let o = tossIfFirstNotNum(n);
-                //if both o and penultimate item are operators then replace lastItem with n
-                compareNAndLastItem(o);
+                //if both o and penultimate item are operators then replace penultimateItem with n
+                compareNAndPenultimateItem(o);
 
                 displayCalcArr();
             }
@@ -106,7 +106,7 @@
         <main>
             <p id="display-fib"></p>
             <p id="display-iter"></p>
-
+            <hr />
             <table class="calculator">
                 <tr>
                     <td colspan="3">
@@ -162,6 +162,65 @@
                     <td><input type="button" value="*" onclick="handleInput('*')" /></td>
                 </tr>
             </table>
+            <hr />
+            <!-- tabs experiment -->
+            <h2>How to Tabs</h2>
+            <div class="about-center section-center"></div>
+            <article class="about">
+                <!-- button container -->
+                <div class="btn-container">
+                    <button class="tab-btn" data-id="history">history</button>
+                    <button class="tab-btn" data-id="vision">vision</button>
+                    <button class="tab-btn" data-id="goals">goals</button>
+                </div>
+
+                <article class="about-content">
+                    <!-- single item  -->
+                    <div class="content active" id="history">
+                        <h4>History</h4>
+                        <!-- history -->
+                        <p>
+                            Hi, 4k player here who reported slahser. Slahser was our position 1
+                            faceless void. He built a mek and had around 29 healing salves in his
+                            inventory. He would chrono both teams in the middle of a fight, salve
+                            his allies, pop mek, and proceeded to yell "SLAHSER'S WAY". We gave him
+                            position 1 farm so he could be a position 5. Granted, his unorthodox
+                            build worked and carried us to victory but I still felt it deserved a
+                            report.
+                        </p>
+                    </div>
+                    <!-- end of single item -->
+                    <!-- single item  -->
+                    <div class="content" id="vision">
+                        <h4>Vision</h4>
+                        <!-- vision -->
+                        <p>
+                            By the way guys, those aren't earbuds BSJ's using. BSJ has actual power
+                            cables connected into his brain to suffice the energy consumption from
+                            generating billions of simulation per second to determine the most
+                            optimal play in his games of dota 2
+                        </p>
+                    </div>
+                    <!-- end of single item -->
+                    <!-- single item  -->
+                    <div class="content" id="goals">
+                        <h4>Goals</h4>
+                        <!-- goals -->
+                        <p>
+                            PeoplesChamp YO PeoplesChamp DID PeoplesChamp HE PeoplesChamp JUST
+                            PeoplesChamp WALK PeoplesChamp UP PeoplesChamp SLOWLY PeoplesChamp AND
+                            PeoplesChamp DOWNSMASH PeoplesChamp
+                        </p>
+                        <ul>
+                            <li>list item</li>
+                            <li>list item</li>
+                            <li>list item</li>
+                        </ul>
+                    </div>
+                    <!-- end of single item -->
+                </article>
+            </article>
+            <hr />
         </main>
     </body>
 </html>

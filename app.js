@@ -42,8 +42,26 @@ for (let key of iterator) {
 //display the array by joining each value separated by a comma and space
 disIter.textContent = iteratorArr.join(', ');
 
-//functional calculator
-//clearScreen(), displayCalc(), calculate(), handleInput()
-//inputHandler() takes input values of btn presses and stores in calcArr
-//calcArr to store inputs, dipslayCalc() displays last item in arr to calcDisplay
-//calculate() will return results to be displayed on press of =
+// tabs experiment
+
+const about = document.querySelector('.about');
+const btns = document.querySelectorAll('.tab-btn');
+const articles = document.querySelectorAll('.content');
+
+about.addEventListener('click', (e) => {
+    // console.log(e.target.dataset.id);
+    const id = e.target.dataset.id;
+    if (id) {
+        //remove active from other buttons
+        btns.forEach(function (btn) {
+            btn.classList.remove('active');
+            e.target.classList.add('active');
+        });
+        //hide other articles
+        articles.forEach(function (article) {
+            article.classList.remove('active');
+        });
+        const element = document.getElementById(id);
+        element.classList.add('active');
+    }
+});

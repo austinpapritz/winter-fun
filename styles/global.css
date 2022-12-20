@@ -86,3 +86,24 @@ input:active[type='button'] {
 #result {
     text-align: end;
 }
+
+/* tabs experiment */
+
+.about-content {
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    padding: 2rem 1.5rem;
+}
+
+/* hide content */
+.content {
+    display: none;
+}
+
+.tab-btn.active {
+    background: var(--clr-white);
+}
+
+.content.active {
+    display: block;
+}
