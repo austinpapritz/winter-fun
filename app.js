@@ -132,11 +132,25 @@ const colorCont = document.querySelector('.color-container');
 const colorSpan = document.querySelector('.color-span');
 
 colorBtn.addEventListener('click', () => {
-    let color1 = Math.floor(Math.random() * 255);
-    let color2 = Math.floor(Math.random() * 255);
-    let color3 = Math.floor(Math.random() * 255);
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
 
-    colorSpan.textContent = '';
-    colorSpan.textContent = `rgb(${color1}, ${color2}, ${color3})`;
-    colorCont.style.background = `rgb(${color1}, ${color2}, ${color3})`;
+    colorSpan.textContent = `rgb(${r}, ${g}, ${b})`;
+    colorCont.style.background = `rgb(${r}, ${g}, ${b})`;
+
+    //convert to hex
+    let hex = rgbToHex(r, g, b);
+    console.log('hex', hex);
 });
+
+function valueToHex(c) {
+    var hex = c.toString(16);
+    return hex;
+}
+
+function rgbToHex(r, g, b) {
+    //BUGGED: only returning valueToHex(b);
+    const value = valueToHex(r) + valueToHex(g) + valueToHex(b);
+    return value;
+}
