@@ -48,8 +48,14 @@ const about = document.querySelector('.about');
 const btns = document.querySelectorAll('.tab-btn');
 const articles = document.querySelectorAll('.content');
 
+//DEAD COMBO: click event listener (e)
+//set data-id in html
+//const id = e.target.dataset.id;
+//const element = document.getElementById(id);
+//element.classList.add('x');
+
 about.addEventListener('click', (e) => {
-    // console.log(e.target.dataset.id);
+    //dynamically grab ids to dynamically grab DOM elements
     const id = e.target.dataset.id;
     if (id) {
         //remove active from other buttons
@@ -61,7 +67,76 @@ about.addEventListener('click', (e) => {
         articles.forEach(function (article) {
             article.classList.remove('active');
         });
+        //dynamically add elements to DOM
         const element = document.getElementById(id);
+        //add class active to the element clicked
         element.classList.add('active');
     }
+});
+
+//slideshow
+const slides = document.querySelectorAll('.slide');
+const nextBtn = document.querySelector('.nextBtn');
+const prevBtn = document.querySelector('.prevBtn');
+
+slides.forEach(function (slide, index) {
+    slide.style.left = `${index * 100}%`;
+});
+
+let counter = 0;
+
+nextBtn.addEventListener('click', () => {
+    counter++;
+    carousel();
+});
+
+prevBtn.addEventListener('click', () => {
+    counter--;
+    carousel();
+});
+
+function carousel() {
+    // // working with slides
+    // if (counter === slides.length) {
+    //     counter = 0;
+    // }
+
+    // if (counter < 0) {
+    //     counter = slides.length - 1;
+    // }
+
+    //working with button
+    if (counter < slides.length - 1) {
+        nextBtn.style.display = 'block';
+    } else {
+        nextBtn.style.display = 'none';
+    }
+
+    if (counter > 0) {
+        prevBtn.style.display = 'block';
+    } else {
+        prevBtn.style.display = 'none';
+    }
+
+    slides.forEach(function (slide) {
+        slide.style.transform = `translateX(-${counter * 100}%)`;
+    });
+}
+
+prevBtn.style.display = 'none';
+
+//random color generator
+
+const colorBtn = document.getElementById('color-btn');
+const colorCont = document.querySelector('.color-container');
+const colorSpan = document.querySelector('.color-span');
+
+colorBtn.addEventListener('click', () => {
+    let color1 = Math.floor(Math.random() * 255);
+    let color2 = Math.floor(Math.random() * 255);
+    let color3 = Math.floor(Math.random() * 255);
+
+    colorSpan.textContent = '';
+    colorSpan.textContent = `rgb(${color1}, ${color2}, ${color3})`;
+    colorCont.style.background = `rgb(${color1}, ${color2}, ${color3})`;
 });
