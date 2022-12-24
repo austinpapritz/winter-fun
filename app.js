@@ -5,14 +5,20 @@ const disFib = document.querySelector('#display-fib');
 const disIter = document.querySelector('#display-iter');
 
 /* State */
+let stringArr = [];
 
 /* Events */
+//PANGRAM
+function isPangram(string) {
+    let stringArr = string.split('');
+}
+
+isPangram('Aaron is a cool dude');
 
 // if you understand the relationship between a number-series true VALUE and its INDEX value
 // you can loop through the array and define the relationship according to [i]
-
-//generateFibonaccis()
-//this function takes in n, where n is the argument put in on the functioncall
+// generateFibonaccis()
+// this function takes in n, where n is the argument put in on the function call
 function generateFibonaccis(n) {
     //start of the array with 1,1 bc they are exceptions to the rule
     var fib = [1, 1];
@@ -32,6 +38,7 @@ disFib.textContent = fib.join(', ');
 //.keys()
 //iterator is essentially an object for iterating an array undergone the .keys() method
 const iterator = fib.keys();
+console.log('iterator', iterator);
 //iterator itself is not an arr, so lets start an empty array for it
 let iteratorArr = [];
 //we have to loop through iterator to extract the key values
@@ -39,6 +46,7 @@ for (let key of iterator) {
     //Pushing key of iterator to an empty array simply makes the value of each index its own index value. So [0] = 0.
     iteratorArr.push(key);
 }
+
 //display the array by joining each value separated by a comma and space
 disIter.textContent = iteratorArr.join(', ');
 
@@ -145,12 +153,13 @@ colorBtn.addEventListener('click', () => {
 });
 
 function valueToHex(c) {
+    //BUGGED: if output starts with 0, the 0 gets dropped
     var hex = c.toString(16);
     return hex;
 }
 
 function rgbToHex(r, g, b) {
-    //BUGGED: only returning valueToHex(b);
+    //
     const value = valueToHex(r) + valueToHex(g) + valueToHex(b);
     return value;
 }
