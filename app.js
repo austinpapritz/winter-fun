@@ -6,7 +6,7 @@ const disIter = document.querySelector('#display-iter');
 const pangramForm = document.querySelector('#pangram');
 const pangramResult = document.querySelector('#result');
 /* State */
-let stringArr = [];
+let stringArray = [];
 const alphabetArray = [
     'a',
     'b',
@@ -38,28 +38,45 @@ const alphabetArray = [
 
 /* Events */
 //PANGRAM
+
 pangramForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const data = new FormData(pangramForm);
     const string = data.get('string');
 
-    isPangram(string);
+    stringToArray(string);
+    isPangram();
+    pangramForm.reset();
 });
 
-function isPangram(string) {
-    let stringArr = string.split('');
+function isPangram() {
+    loopAlphabet();
+}
+
+function stringToArray(string) {
+    stringArray = string.split('');
 }
 
 function loopAlphabet() {
     for (let i = 0; i < 26; i++) {
-        compareAlphabetAndString(alphabetArray[i]);
+        const value = compareAlphabetAndString(alphabetArray[i]);
     }
 }
 
-loopAlphabet();
+function compareAlphabetAndString(l) {
+    let matchStatus = false;
 
-function compareAlphabetAndString(l) {}
+    for (let j = 0; j < stringArray.length || matchStatus === true; j++) {
+        if (stringArray[j] === l) {
+            matchStatus = true;
+            console.log('matchStatus is true', matchStatus);
+        }
+    }
+    console.log('matchStatus is false', matchStatus);
+    return matchStatus;
+}
+
 // if you understand the relationship between a number-series true VALUE and its INDEX value
 // you can loop through the array and define the relationship according to [i]
 // generateFibonaccis()
@@ -83,7 +100,6 @@ disFib.textContent = fib.join(', ');
 //.keys()
 //iterator is essentially an object for iterating an array undergone the .keys() method
 const iterator = fib.keys();
-console.log('iterator', iterator);
 //iterator itself is not an arr, so lets start an empty array for it
 let iteratorArr = [];
 //we have to loop through iterator to extract the key values
