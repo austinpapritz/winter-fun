@@ -37,14 +37,17 @@ const alphabetArray = [
     'y',
     'z',
 ];
+let noDupes = [];
+
+let confirmedLetters = [];
 
 /* Events */
 //PANGRAM
 
 pangramForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    let confirmedLetters = [];
+    noDupes = [];
+    confirmedLetters = [];
 
     const data = new FormData(pangramForm);
     const stringData = data.get('string');
@@ -60,12 +63,11 @@ pangramForm.addEventListener('submit', (e) => {
 });
 
 function loopAlphabetArray() {
+    let result;
     for (let i = 0; i < alphabetArray.length; i++) {
-        let result = compareLetterToString(alphabetArray[i]);
-        if (result === true) {
-            return true;
-        }
+        result = compareLetterToString(alphabetArray[i]);
     }
+    return result;
 }
 function compareLetterToString(l) {
     //falsyCounter
@@ -73,8 +75,14 @@ function compareLetterToString(l) {
     for (let j = 0; j < stringArray.length; j++) {
         if (stringArray[j] === l) {
             //push l to confirmedLettersArray
-            return true;
+            confirmedLetters.push(l);
+            noDupes = [...new Set(confirmedLetters)];
         }
+    }
+    if (noDupes.length === 26) {
+        return true;
+    } else {
+        return false;
     }
 }
 
