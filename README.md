@@ -24,27 +24,10 @@ stringArr = []
 //working through how to ultimate process a falsy
 //side question: how to turn string into character array
 
-function isPangram(string) {
-let stringArr = string.split('');
-stringArr.push(string)
-const boolean = loopAlphabet()
-if (!boolean) {
-return false;
-} else {
-return true;
-}
-
-}
-
-function loopAlphabet() {
-for ( i = 0; i < alphabetArray.length - 1; i++) {
-compareAlphabetAndString(i) {
-}
-
-function compareAlphabetAndString(i) {
-for (j = 0; j < string.length - 1; j++
-return string[j].match(alphabetArray[i]);
-}
+1. confirmedLetters array
+2. push l if it is in string
+3. remove duplicates in confirmedLettersArr
+4. if confirmedLettersArr.length ==== 26 then it is a pangram!
 
 //PANGRAM
 The quick brown fox jumps over the lazy dog.

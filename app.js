@@ -46,6 +46,7 @@ pangramForm.addEventListener('submit', (e) => {
 
     const data = new FormData(pangramForm);
     const string = data.get('string');
+    //put letters to lowercase with string.toLowerCase()
     stringArray = string.split('');
 
     const result = loopAlphabetArray();
@@ -66,9 +67,10 @@ function loopAlphabetArray() {
 
 function compareLetterToString(l) {
     //falsyCounter
+    
     for (let j = 0; j < stringArray.length; j++) {
-        //increment falsy counter
         if (stringArray[j] === l) {
+            //push l to confirmedLettersArray
             return true;
     }
 }
