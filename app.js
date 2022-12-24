@@ -48,16 +48,40 @@ pangramForm.addEventListener('submit', (e) => {
     const string = data.get('string');
     stringArray = string.split('');
 
-    loopAlphabetArray();
+    const result = loopAlphabetArray();
+    console.log('result', result);
+
+    displayResults(result);
 
     pangramForm.reset();
 });
 
 function loopAlphabetArray() {
     for (let i = 0; i < alphabetArray.length; i++) {
-        console.log('alphabetArray[i]', alphabetArray[i]);
+        let result = compareLetterToString(alphabetArray[i]);
+        if (result === true) {
+            return true;
     }
 }
+
+function compareLetterToString(l) {
+    //falsyCounter
+    for (let j = 0; j < stringArray.length; j++) {
+        //increment falsy counter
+        if (stringArray[j] === l) {
+            return true;
+    }
+}
+
+function displayResults(result) {
+    if (result === true) {
+        pangramResult.textContent = '✔️';
+    } else {
+        pangramResult.textContent = '❌';
+    }
+}
+
+//if true span.textContent = checkmark, otherwise X
 
 // if you understand the relationship between a number-series true VALUE and its INDEX value
 // you can loop through the array and define the relationship according to [i]
