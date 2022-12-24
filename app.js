@@ -44,13 +44,15 @@ const alphabetArray = [
 pangramForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    let confirmedLetters = [];
+
     const data = new FormData(pangramForm);
-    const string = data.get('string');
+    const stringData = data.get('string');
     //put letters to lowercase with string.toLowerCase()
+    const string = stringData.toLowerCase();
     stringArray = string.split('');
 
     const result = loopAlphabetArray();
-    console.log('result', result);
 
     displayResults(result);
 
@@ -62,16 +64,17 @@ function loopAlphabetArray() {
         let result = compareLetterToString(alphabetArray[i]);
         if (result === true) {
             return true;
+        }
     }
 }
-
 function compareLetterToString(l) {
     //falsyCounter
-    
+
     for (let j = 0; j < stringArray.length; j++) {
         if (stringArray[j] === l) {
             //push l to confirmedLettersArray
             return true;
+        }
     }
 }
 

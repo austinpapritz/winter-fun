@@ -27,6 +27,7 @@ stringArr = []
 1. confirmedLetters array
 2. push l if it is in string
 3. remove duplicates in confirmedLettersArr
+   let uniqueChars = [...new Set(chars)];
 4. if confirmedLettersArr.length ==== 26 then it is a pangram!
 
 //PANGRAM
