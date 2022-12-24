@@ -3,12 +3,22 @@
 /* Get DOM Elements */
 const disFib = document.querySelector('#display-fib');
 const disIter = document.querySelector('#display-iter');
-
+const pangramForm = document.querySelector('#pangram');
+const pangramResult = document.querySelector('#result');
 /* State */
 let stringArr = [];
 
 /* Events */
 //PANGRAM
+pangramForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = new FormData(pangramForm);
+    const string = data.get('string');
+
+    console.log('string', string);
+});
+
 function isPangram(string) {
     let stringArr = string.split('');
 }
