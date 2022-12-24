@@ -5,7 +5,9 @@ const disFib = document.querySelector('#display-fib');
 const disIter = document.querySelector('#display-iter');
 const pangramForm = document.querySelector('#pangram');
 const pangramResult = document.querySelector('#result');
+
 /* State */
+
 let stringArray = [];
 const alphabetArray = [
     'a',
@@ -44,37 +46,17 @@ pangramForm.addEventListener('submit', (e) => {
 
     const data = new FormData(pangramForm);
     const string = data.get('string');
+    stringArray = string.split('');
 
-    stringToArray(string);
-    isPangram();
+    loopAlphabetArray();
+
     pangramForm.reset();
 });
 
-function isPangram() {
-    loopAlphabet();
-}
-
-function stringToArray(string) {
-    stringArray = string.split('');
-}
-
-function loopAlphabet() {
-    for (let i = 0; i < 26; i++) {
-        const value = compareAlphabetAndString(alphabetArray[i]);
+function loopAlphabetArray() {
+    for (let i = 0; i < alphabetArray.length; i++) {
+        console.log('alphabetArray[i]', alphabetArray[i]);
     }
-}
-
-function compareAlphabetAndString(l) {
-    let matchStatus = false;
-
-    for (let j = 0; j < stringArray.length || matchStatus === true; j++) {
-        if (stringArray[j] === l) {
-            matchStatus = true;
-            console.log('matchStatus is true', matchStatus);
-        }
-    }
-    console.log('matchStatus is false', matchStatus);
-    return matchStatus;
 }
 
 // if you understand the relationship between a number-series true VALUE and its INDEX value
