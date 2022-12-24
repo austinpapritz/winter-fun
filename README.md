@@ -45,3 +45,6 @@ function compareAlphabetAndString(i) {
 for (j = 0; j < string.length - 1; j++
 return string[j].match(alphabetArray[i]);
 }
+
+//PANGRAM
+The quick brown fox jumps over the lazy dog.

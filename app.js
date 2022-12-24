@@ -7,6 +7,34 @@ const pangramForm = document.querySelector('#pangram');
 const pangramResult = document.querySelector('#result');
 /* State */
 let stringArr = [];
+const alphabetArray = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q',
+    'r',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z',
+];
 
 /* Events */
 //PANGRAM
@@ -16,15 +44,22 @@ pangramForm.addEventListener('submit', (e) => {
     const data = new FormData(pangramForm);
     const string = data.get('string');
 
-    console.log('string', string);
+    isPangram(string);
 });
 
 function isPangram(string) {
     let stringArr = string.split('');
 }
 
-isPangram('Aaron is a cool dude');
+function loopAlphabet() {
+    for (let i = 0; i < 26; i++) {
+        compareAlphabetAndString(alphabetArray[i]);
+    }
+}
 
+loopAlphabet();
+
+function compareAlphabetAndString(l) {}
 // if you understand the relationship between a number-series true VALUE and its INDEX value
 // you can loop through the array and define the relationship according to [i]
 // generateFibonaccis()
