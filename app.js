@@ -218,6 +218,7 @@ prevBtn.style.display = 'none';
 const colorBtn = document.getElementById('color-btn');
 const colorCont = document.querySelector('.color-container');
 const colorSpan = document.querySelector('.color-span');
+const colorHex = document.querySelector('.color-hex');
 
 colorBtn.addEventListener('click', () => {
     let r = Math.floor(Math.random() * 255);
@@ -229,12 +230,17 @@ colorBtn.addEventListener('click', () => {
 
     //convert to hex
     let hex = rgbToHex(r, g, b);
+    colorHex.textContent = '#' + hex;
     console.log('hex', hex);
 });
 
 function valueToHex(c) {
     //BUGGED: if output starts with 0, the 0 gets dropped
     var hex = c.toString(16);
+    //sometimes hex returns as only one digit and needs a 0 added before it to make it two digits
+    if (hex.length === 1) {
+        hex = 0 + hex;
+    }
     return hex;
 }
 
