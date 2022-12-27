@@ -8,6 +8,7 @@ const pangramForm = document.querySelector('#pangram');
 const pangramResult = document.querySelector('#result');
 
 const xifyForm = document.querySelector('#xify-form');
+const xifySpan = document.querySelector('#xed');
 
 /* State */
 
@@ -51,6 +52,22 @@ xifyForm.addEventListener('submit', (e) => {
 
     const data = new FormData(xifyForm);
     const string = data.get('xify-input');
+
+    let exedSplit = [];
+    let exedArr = [];
+
+    exedSplit = string.split('');
+
+    for (let i = 0; i < exedSplit.length - 4; i++) {
+        exedArr.push('x');
+    }
+    for (let j = 4; j > 0; j--) {
+        exedArr.push(exedSplit[exedSplit.length - j]);
+    }
+
+    xifySpan.textContent = exedArr.join('');
+
+    xifyForm.reset();
 });
 
 //PANGRAM
