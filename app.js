@@ -3,8 +3,11 @@
 /* Get DOM Elements */
 const disFib = document.querySelector('#display-fib');
 const disIter = document.querySelector('#display-iter');
+
 const pangramForm = document.querySelector('#pangram');
 const pangramResult = document.querySelector('#result');
+
+const xifyForm = document.querySelector('#xify-form');
 
 /* State */
 
@@ -42,8 +45,15 @@ let noDupes = [];
 let confirmedLetters = [];
 
 /* Events */
-//PANGRAM
+//x-ify a string
+xifyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
+    const data = new FormData(xifyForm);
+    const string = data.get('xify-input');
+});
+
+//PANGRAM
 pangramForm.addEventListener('submit', (e) => {
     e.preventDefault();
     noDupes = [];
@@ -215,12 +225,21 @@ prevBtn.style.display = 'none';
 
 //random color generator
 
-const colorBtn = document.getElementById('color-btn');
+const rgbBtn = document.getElementById('rgb-btn');
+const hexBtn = document.getElementById('hex-btn');
 const colorCont = document.querySelector('.color-container');
 const colorSpan = document.querySelector('.color-span');
 const colorHex = document.querySelector('.color-hex');
 
-colorBtn.addEventListener('click', () => {
+rgbBtn.addEventListener('click', () => {
+    calculateAndDisplayColorValues();
+});
+
+hexBtn.addEventListener('click', () => {
+    calculateAndDisplayColorValues();
+});
+
+function calculateAndDisplayColorValues() {
     let r = Math.floor(Math.random() * 255);
     let g = Math.floor(Math.random() * 255);
     let b = Math.floor(Math.random() * 255);
@@ -231,9 +250,7 @@ colorBtn.addEventListener('click', () => {
     //convert to hex
     let hex = rgbToHex(r, g, b);
     colorHex.textContent = '#' + hex;
-    console.log('hex', hex);
-});
-
+}
 function valueToHex(c) {
     //BUGGED: if output starts with 0, the 0 gets dropped
     var hex = c.toString(16);
