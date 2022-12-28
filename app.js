@@ -46,7 +46,26 @@ let noDupes = [];
 let confirmedLetters = [];
 
 /* Events */
+//shortest answer below:
+//function descendingOrder(n){
+//    return parseInt(String(n).split('').sort().reverse().join(''))
+//}
+function descendingOrder(n) {
+    let digits = n.toString().split('');
+    let realDigits = digits.map(Number);
+    let descendingArr = realDigits.sort(function (a, b) {
+        return b - a;
+    });
+    return parseInt(descendingArr.join(''));
+}
+
+console.log('descendingOrder(12345)', descendingOrder(12345));
+
 //x-ify a string
+//CODEWAR ANSWER BELOW
+//function maskify(cc) {
+//    return cc.slice(0, -4).replace(/./g, '#') + cc.slice(-4);
+//}
 xifyForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
