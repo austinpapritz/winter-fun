@@ -46,7 +46,47 @@ let noDupes = [];
 let confirmedLetters = [];
 
 /* Events */
-//shortest answer below:
+//how to find outlier
+//best solution below:
+// function findOutlier(int) {
+//     var even = int.filter((a) => a % 2 == 0);
+//     var odd = int.filter((a) => a % 2 !== 0);
+//     return even.length == 1 ? even[0] : odd[0];
+// }
+
+let oddArr = [];
+let evenArr = [];
+
+function findOutlier(integers) {
+    sortArr(integers);
+    return returnArr();
+}
+
+function sortArr(integers) {
+    oddArr = [];
+    evenArr = [];
+
+    for (let i = 0; i < integers.length; i++) {
+        let num = integers[i];
+        let remainder = num % 2;
+        if (remainder === 0) {
+            evenArr.push(num);
+        } else {
+            oddArr.push(num);
+        }
+    }
+}
+
+function returnArr() {
+    if (oddArr.length === 1) {
+        return oddArr[0];
+    } else {
+        return evenArr[0];
+    }
+}
+
+//how to reorder digits of n in descending order
+//best answer below:
 //function descendingOrder(n){
 //    return parseInt(String(n).split('').sort().reverse().join(''))
 //}
@@ -58,8 +98,6 @@ function descendingOrder(n) {
     });
     return parseInt(descendingArr.join(''));
 }
-
-console.log('descendingOrder(12345)', descendingOrder(12345));
 
 //x-ify a string
 //CODEWAR ANSWER BELOW
